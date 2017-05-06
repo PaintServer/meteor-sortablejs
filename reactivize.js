@@ -1,3 +1,5 @@
+import Sortable from 'sortablejs'
+
 /*
 Make a Sortable reactive by binding it to a Mongo.Collection.
 Calls `rubaxa:sortable/collection-update` on the server to update the sortField of affected records.
@@ -92,7 +94,7 @@ Template.sortable.created = function () {
 		var orderField = templateInstance.options.sortField;
 		var selector = templateInstance.options.selector || {}, modifier = {$set: {}};
 		var ids = [];
-		var startOrder = templateInstance.collection.findOne(itemId)[orderField];
+		var startOrder = templateInstance.collection.findOne({_id: itemId})[orderField];
 		if (orderPrevItem !== null) {
 			// Element has a previous sibling, therefore it was moved down in the list.
 			// Decrease the order of intervening elements.
